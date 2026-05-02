@@ -1,13 +1,9 @@
 import { useEffect, useState } from 'react'
-import './App.css'
-
-type Post = {
-  id: number
-  title: string
-}
+import type { Task } from './types'
+import TaskList from './components/TaskList'
 
 function App() {
-  const [tasks, setTasks] = useState<any[]>([])
+  const [tasks, setTasks] = useState<Task[]>([])
 
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/todos')
@@ -18,11 +14,7 @@ function App() {
   return (
     <>
       <h1>Task Manager</h1>
-      <ul>
-        {tasks.slice(0, 5).map(task => (
-          <li key={task.id}>{task.title}</li>
-        ))}  
-      </ul>
+      <TaskList tasks={tasks} />
     </>
   )
 }
