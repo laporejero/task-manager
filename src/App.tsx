@@ -11,10 +11,17 @@ function App() {
       .then(data => setTasks(data))
   }, [])
 
+  function toggleTask(id: number) {
+    setTasks(prevTasks =>
+      prevTasks.map(task => 
+        task.id === id ? { ...task, completed: !task.completed } : task
+      ))
+  }
+
   return (
     <>
       <h1>Task Manager</h1>
-      <TaskList tasks={tasks} />
+      <TaskList tasks={tasks} toggleTask={toggleTask} />
     </>
   )
 }

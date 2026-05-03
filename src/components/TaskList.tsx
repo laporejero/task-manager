@@ -3,13 +3,14 @@ import TaskItem from "./TaskItem"
 
 type TaskListProps = {
     tasks: Task[]
+    toggleTask: (id: number) => void
 }
 
-function TaskList({ tasks }: TaskListProps) {
+function TaskList({ tasks, toggleTask }: TaskListProps) {
     return (
         <ul>
-            {tasks.slice(0, 5).map(task => (
-                <TaskItem task={task} />
+            {tasks.slice(0, 10).map(task => (
+                <TaskItem key={task.id} task={task} toggleTask={toggleTask} />
             ))}
         </ul>
     )
