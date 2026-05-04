@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import type { Task } from './types'
 import TaskList from './components/TaskList'
+import TaskForm from './components/TaskForm'
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>([])
+  const [newTask, setNewTask] = useState("")
 
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/todos')
@@ -18,9 +20,21 @@ function App() {
       ))
   }
 
+  function addTask() {
+    const newItem: Task = {
+      id: Date.now(),
+      title: newTask,
+      completed: false
+    }
+
+    setTasks(prevTask => [...prevTask, newItem])
+    setNewTask("")
+  }
+
   return (
     <>
       <h1>Task Manager</h1>
+      <TaskForm newTask={newTask} setNewTask={setNewTask} addTask={addTask} />
       <TaskList tasks={tasks} toggleTask={toggleTask} />
     </>
   )

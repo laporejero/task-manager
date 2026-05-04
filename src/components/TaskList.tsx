@@ -9,7 +9,7 @@ type TaskListProps = {
 function TaskList({ tasks, toggleTask }: TaskListProps) {
     return (
         <ul>
-            {tasks.slice(0, 10).map(task => (
+            {tasks.map(task => (
                 <TaskItem key={task.id} task={task} toggleTask={toggleTask} />
             ))}
         </ul>
