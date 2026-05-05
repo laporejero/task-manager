@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import type { Task } from './types'
+import type { Task } from './types/types'
 import TaskList from './components/TaskList'
 import TaskForm from './components/TaskForm'
 
@@ -10,14 +10,15 @@ function App() {
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/todos')
       .then(res => res.json())
-      .then(data => setTasks(data))
+      .then((data: Task[]) => setTasks(data))
   }, [])
 
   function toggleTask(id: number) {
     setTasks(prevTasks =>
       prevTasks.map(task => 
         task.id === id ? { ...task, completed: !task.completed } : task
-      ))
+      )
+    )
   }
 
   function addTask() {
@@ -27,7 +28,9 @@ function App() {
       completed: false
     }
 
+    // add new task to the tasks array
     setTasks(prevTask => [...prevTask, newItem])
+    // sets the newTask into empty strings again
     setNewTask("")
   }
 

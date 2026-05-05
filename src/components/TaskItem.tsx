@@ -1,4 +1,4 @@
-import type { Task } from "../types"
+import type { Task } from "../types/types"
 
 type TasksItemProps = {
     task: Task
@@ -10,8 +10,10 @@ function TaskItem({task, toggleTask}: TasksItemProps) {
 
     return (
         <li>
-            {task.title} <br />
-            {/* update to toggle switch later */}
+            <span style={{ textDecoration: task.completed ? "line-through green" : "" }}>       
+                {task.title}
+            </span>
+            <br />
             <input 
                 type="checkbox" 
                 id={checkboxId} 
@@ -19,7 +21,7 @@ function TaskItem({task, toggleTask}: TasksItemProps) {
                 checked={task.completed}
             />
             <label htmlFor={checkboxId}>
-                {task.completed ? "COMPLETED" : "TO DO"}
+                {task.completed ? "Task Completed" : "To Do"}
             </label>
         </li>
     )
