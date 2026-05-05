@@ -22,6 +22,11 @@ function App() {
   }
 
   function addTask() {
+    if (!newTask.trim()) {
+      alert("Invalid input")
+      return
+    }
+
     const newItem: Task = {
       id: Date.now(),
       title: newTask,
