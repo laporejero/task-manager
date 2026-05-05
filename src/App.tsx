@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react'
-import type { Task } from './types/types'
+import type { Filter, Task } from './types/types'
 import TaskList from './components/TaskList'
 import TaskForm from './components/TaskForm'
+import TaskFilter from './components/TaskFilter'
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>([])
   const [newTask, setNewTask] = useState("")
+  const [filter, setFilter] = useState<Filter>("all")
+
+  console.log(filter)
 
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/todos')
@@ -21,9 +25,15 @@ function App() {
     )
   }
 
+  const filteredTasks = tasks.filter(task => {
+    if (filter === "active") return !task.completed
+    if (filter === "completed") return task.completed
+    return true
+  })
+
   function addTask() {
     if (!newTask.trim()) {
-      alert("Invalid input")
+      alert("Task cannot me empty")
       return
     }
 
@@ -43,7 +53,8 @@ function App() {
     <>
       <h1>Task Manager</h1>
       <TaskForm newTask={newTask} setNewTask={setNewTask} addTask={addTask} />
-      <TaskList tasks={tasks} toggleTask={toggleTask} />
+      <TaskFilter filter={filter} setFilter={setFilter} />
+      <TaskList tasks={filteredTasks} toggleTask={toggleTask} />
     </>
   )
 }
