@@ -7,9 +7,13 @@ import TaskFilter from './components/TaskFilter'
 function App() {
   const [tasks, setTasks] = useState<Task[]>([])
   const [newTask, setNewTask] = useState("")
-  const [filter, setFilter] = useState<Filter>("all")
+  const [filter, setFilter] = useState<Filter>("All")
 
-  console.log(filter)
+  const filteredTasks = tasks.filter(task => {
+    if (filter === "Active") return !task.completed
+    if (filter === "Completed") return task.completed
+    return true
+  })
 
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/todos')
@@ -24,12 +28,6 @@ function App() {
       )
     )
   }
-
-  const filteredTasks = tasks.filter(task => {
-    if (filter === "active") return !task.completed
-    if (filter === "completed") return task.completed
-    return true
-  })
 
   function addTask() {
     if (!newTask.trim()) {

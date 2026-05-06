@@ -4,4 +4,4 @@ export type Task = {
   completed: boolean
 }
 
-export type Filter = "all" | "active" | "completed"
+export type Filter = "All" | "Active" | "Completed"
