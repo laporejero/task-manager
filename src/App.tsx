@@ -75,10 +75,12 @@ function App() {
 
   return (
     <>
-      <h1>Task Manager</h1>
+      <h3>Task Manager</h3>
       <TaskForm newTask={newTask} setNewTask={setNewTask} addTask={addTask} />
       <TaskFilter filter={filter} setFilter={setFilter} />
-      {content}
+      <div>
+        {content}
+      </div>
     </>
   )
 }

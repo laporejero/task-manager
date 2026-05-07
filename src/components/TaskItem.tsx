@@ -14,14 +14,15 @@ function TaskItem({task, toggleTask}: TasksItemProps) {
                 {task.title}
             </span>
             <br />
-            <input 
-                type="checkbox" 
-                id={checkboxId} 
-                onChange={() => toggleTask(task.id)}
-                checked={task.completed}
-            />
             <label htmlFor={checkboxId}>
                 {task.completed ? "Task Completed" : "To Do"}
+                <input 
+                    type="checkbox" 
+                    className="task-checkbox"
+                    id={checkboxId} 
+                    onChange={() => toggleTask(task.id)}
+                    checked={task.completed}
+                />
             </label>
         </li>
     )

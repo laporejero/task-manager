@@ -6,7 +6,7 @@ type TaskFormProps = {
 
 function TaskForm({ newTask, setNewTask, addTask }: TaskFormProps) {
     return (
-        <form onSubmit={(e) => e.preventDefault()}>
+        <form className="task-form" onSubmit={(e) => e.preventDefault()}>
             <label htmlFor="add-task">New Task:</label>
             <input 
                 type="text"
@@ -14,7 +14,6 @@ function TaskForm({ newTask, setNewTask, addTask }: TaskFormProps) {
                 value={newTask}
                 onChange={(e) => setNewTask(e.target.value)}
             />
-
             <button onClick={addTask}>Add</button>
         </form>
     )

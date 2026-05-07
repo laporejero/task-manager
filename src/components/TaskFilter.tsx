@@ -9,21 +9,22 @@ const options: Filter[] = ["All", "Active", "Completed"]
 
 function TaskFilter({ filter, setFilter }: TaskFilterProps) {
     return (
-        <div>
-            <label>Show Task:</label>
+        <form className="task-filter">
+            <label>Show Tasks: </label>
             {options.map(option => (
                 <label>
                     <input 
                         type="radio" 
+                        className="option-btn"
                         name="task-filter"
-                        value="all"
+                        value={option}
                         checked={filter === option}
                         onChange={() => setFilter(option)}
                     />
                     {option}
                 </label>
             ))}  
-        </div>
+        </form>
     )
 }
 
