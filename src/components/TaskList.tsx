@@ -4,13 +4,14 @@ import TaskItem from "./TaskItem"
 type TaskListProps = {
     tasks: Task[]
     toggleTask: (id: number) => void
+    deleteTask: (id: number) => void
 }
 
-function TaskList({ tasks, toggleTask }: TaskListProps) {
+function TaskList({ tasks, toggleTask, deleteTask }: TaskListProps) {
     return (
         <ul>
             {tasks.map(task => (
-                <TaskItem key={task.id} task={task} toggleTask={toggleTask} />
+                <TaskItem key={task.id} task={task} toggleTask={toggleTask} deleteTask={deleteTask} />
             ))}
         </ul>
     )

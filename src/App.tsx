@@ -18,6 +18,7 @@ function App() {
   })
 
   useEffect(() => {
+    // If localStorage already has tasks saved, use them instead of fetching API.
     const saved = localStorage.getItem("tasks")
     if (saved) {
       setTasks(JSON.parse(saved))
@@ -55,6 +56,7 @@ function App() {
     }
   }, [tasks])
 
+  // Toggle Task feature
   function toggleTask(id: number) {
     setTasks(prevTasks =>
       prevTasks.map(task => 
@@ -63,6 +65,7 @@ function App() {
     )
   }
 
+  // Add task function
   function addTask() {
     if (!newTask.trim()) {
       alert("Task cannot me empty")
@@ -82,6 +85,13 @@ function App() {
     setNewTask("")
   }
 
+  // Delete task function
+  function deleteTask(id: number) {
+    setTasks(prevTasks =>
+      prevTasks.filter(task => task.id !== id)
+    )
+  }
+
   let content
 
   if (loading) {
@@ -92,7 +102,7 @@ function App() {
     content = <p>No tasks available</p>
   } else {
     content = (
-      <TaskList tasks={filteredTasks} toggleTask={toggleTask} />
+      <TaskList tasks={filteredTasks} toggleTask={toggleTask} deleteTask={deleteTask} />
     )
   }
 

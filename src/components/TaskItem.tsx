@@ -1,11 +1,14 @@
 import type { Task } from "../types/types"
+import { IonIcon } from "@ionic/react"
+import { createOutline, trashOutline } from 'ionicons/icons';
 
 type TasksItemProps = {
     task: Task
     toggleTask: (id: number) => void
+    deleteTask: (id: number) => void
 }
 
-function TaskItem({task, toggleTask}: TasksItemProps) {
+function TaskItem({task, toggleTask, deleteTask}: TasksItemProps) {
     const checkboxId = `checkbox-${task.id}`
 
     return (
@@ -21,9 +24,19 @@ function TaskItem({task, toggleTask}: TasksItemProps) {
                 {task.title}
             </span>
             <br />
-            <label htmlFor={checkboxId}>
+            {/* <label htmlFor={checkboxId}>
                 {task.completed ? "Task Completed" : "To Do"}
-            </label>
+            </label> */}
+            {/* Delete Icon */}
+            <IonIcon
+                icon={trashOutline}
+                style={{
+                fontSize: '1.8rem',
+                color: 'black',
+                cursor: 'pointer'
+                }}
+                onClick={() => deleteTask(task.id)}
+            />
         </li>
     )
 }
