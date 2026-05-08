@@ -11,11 +11,6 @@ function TaskItem({task, toggleTask}: TasksItemProps) {
     return (
         <li>
             <span style={{ textDecoration: task.completed ? "line-through green" : "" }}>       
-                {task.title}
-            </span>
-            <br />
-            <label htmlFor={checkboxId}>
-                {task.completed ? "Task Completed" : "To Do"}
                 <input 
                     type="checkbox" 
                     className="task-checkbox"
@@ -23,6 +18,11 @@ function TaskItem({task, toggleTask}: TasksItemProps) {
                     onChange={() => toggleTask(task.id)}
                     checked={task.completed}
                 />
+                {task.title}
+            </span>
+            <br />
+            <label htmlFor={checkboxId}>
+                {task.completed ? "Task Completed" : "To Do"}
             </label>
         </li>
     )

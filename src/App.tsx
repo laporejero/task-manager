@@ -18,20 +18,42 @@ function App() {
   })
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/todos?_limit=10')
-      .then(res => {
+    const saved = localStorage.getItem("tasks")
+    if (saved) {
+      setTasks(JSON.parse(saved))
+      setLoading(false)
+      return
+    }
+
+    async function fetchTasksData() {
+      try {
+        const res = await fetch('https://jsonplaceholder.typicode.com/todos?_limit=10')
         if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`)
+          throw new Error(`HTTP failed! status: ${res.status}`)
         }
-        return res.json()
-      })
-      .then((data: Task[]) => setTasks(data))
-      .catch(err => {
-        console.error('Fetch failed:', err)
-        setError(err.message)
-      })
-      .finally(() => setLoading(false))
+        const data: Task[] = await res.json()
+        setTasks(data)
+      } catch (err) {
+        console.log(err)
+        if (err instanceof Error) {
+          setError(err.message)
+        } else {
+          setError('Something went wrong')
+        }
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchTasksData()
   }, [])
+
+  // Every time tasks change, save them to the browser
+  useEffect(() => {
+    if (tasks.length > 0) {
+      localStorage.setItem("tasks", JSON.stringify(tasks))
+    }
+  }, [tasks])
 
   function toggleTask(id: number) {
     setTasks(prevTasks =>
@@ -48,6 +70,7 @@ function App() {
     }
 
     const newItem: Task = {
+      userId: 1,
       id: Date.now(),
       title: newTask,
       completed: false
