@@ -44,7 +44,7 @@ body {
 h1, h2, h3, h4, h5 {
     font-weight: var(--font-weight-bold);
     line-height: var(--line-height-tight);
-    font-family: var(--font-family-heading);
+    font-family: var(--font-family);
     letter-spacing: var(--letter-spacing-tight);
 }
 
@@ -71,7 +71,7 @@ p, ul, label {
 .main-container {
     width: 70rem;
     height: 60rem;
-    padding: 2rem;
+    padding: 2.4rem;
     background-color: #fff;
     border-radius: 2rem;
     box-shadow: 0 6px 1rem 0 rgba(0, 0, 0, 0.19);
@@ -88,6 +88,7 @@ p, ul, label {
     min-height: 0;
     overflow-y: auto;
     overflow: auto;
+    padding-top: 1.5rem;
 }
 
 h3 {
@@ -116,11 +117,17 @@ form.task-filter {
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin-bottom: 1.5rem;
 }
 
 .option-btn {
     margin-right: 2px;
+    transition: all 0.15s ease;
+}
+
+.option-btn.active {
+    background: #222;
+    color: white;
+    transform: translateY(-1px);
 }
 
 /* TASK ITEM */
@@ -137,10 +144,43 @@ ul > li {
     border-radius: 5px;
     padding: 5px;
     margin-bottom: 7px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    animation: taskIn 0.2s ease-out;
+}
+
+ul > li:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
 .task-checkbox {
     margin-right: 7px;
+    transition: transform 0.15s ease;
+}
+
+.task-checkbox:checked {
+    transform: scale(1.1);
+}
+
+li span {
+    transition: opacity 0.2s ease, text-decoration 0.2s ease;
+}
+
+li.completed span {
+    opacity: 0.6;
+    text-decoration: line-through;
+}
+
+/* ------------- ANIMATIONS ------------- */
+@keyframes taskIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 

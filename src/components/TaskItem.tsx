@@ -1,6 +1,6 @@
 import type { Task } from "../types/types"
 import { IonIcon } from "@ionic/react"
-import { createOutline, trashOutline } from 'ionicons/icons';
+import { trashOutline } from 'ionicons/icons';
 
 type TasksItemProps = {
     task: Task
