@@ -1,73 +1,30 @@
-# React + TypeScript + Vite
+# Task Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A Task Manager built with React and Typescript featuring API fetching, task filtering, and localStorage persistence.
 
-Currently, two official plugins are available:
+## Features:
+- Add new tasks
+- Delete tasks
+- Toggle task completion
+- Filter tasks (All / Active / Completed)
+- Loading and error handling
+- localStorage persistence
+- Responsive design
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tech stack:
+- React
+- TypeScript
+- CSS
+- Vite
 
-## React Compiler
+## What I learned:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+This project improved my understanding of component structure by organizing code into smaller, manageable blocks, it becomes easier to update, modify, or fix one part of the app without disrupting others
 
-## Expanding the ESLint configuration
+Working on state I learned how the App as the common parent should hold the state as the single source of truth and how the App component passes data to the child components as props and when user interacts with the UI, child components then calls the functions passed from the parent component to update the state. React re-renders the components with the new data when state updates.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+In this project I learned how to fetch API. Not only that but also in handling loading and error state. By properly managing these states prevents application crashes, informs users when data is loading, showing a message when error occurs. Without managing these, leads to a negative user experience and potential issues.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Lastly, what I learned about is the state persistence. React's state resets on every page reload and getting a state from localStorage allows you to save that state so the data is still there when the user returns or reloads the app.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Overall, working on this simple project helped me understand the fundamentals of React and how using Typescript improves code reliability and the developer experience. Although Typescript requires more code to write and maintain, it allows you to catch errors early, write more predictable code, and navigate projects with ease
