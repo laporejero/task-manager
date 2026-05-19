@@ -6,7 +6,6 @@ import TaskFilter from './components/TaskFilter'
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>([])
-  const [newTask, setNewTask] = useState("")
   const [filter, setFilter] = useState<Filter>("All")
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -66,8 +65,8 @@ function App() {
   }
 
   // Add task function
-  function addTask() {
-    if (!newTask.trim()) {
+  function handleAddTask(taskName: string):void {
+    if (!taskName.trim()) {
       alert("Task cannot me empty")
       return
     }
@@ -75,14 +74,12 @@ function App() {
     const newItem: Task = {
       userId: 1,
       id: Date.now(),
-      title: newTask,
+      title: taskName,
       completed: false
     }
 
     // add new task to the tasks array
     setTasks(prevTask => [...prevTask, newItem])
-    // sets the newTask into empty strings again
-    setNewTask("")
   }
 
   // Delete task function
@@ -109,7 +106,7 @@ function App() {
   return (
     <>
       <h3>Task Manager</h3>
-      <TaskForm newTask={newTask} setNewTask={setNewTask} addTask={addTask} />
+      <TaskForm handleAddTask={handleAddTask} />
       <TaskFilter filter={filter} setFilter={setFilter} />
       <div>
         {content}

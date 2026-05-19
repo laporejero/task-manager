@@ -1,10 +1,18 @@
+import { useState } from "react"
+
 type TaskFormProps = {
-    newTask: string
-    setNewTask: (v: string) => void
-    addTask: () => void
+    handleAddTask: (title: string) => void
 }
 
-function TaskForm({ newTask, setNewTask, addTask }: TaskFormProps) {
+function TaskForm({ handleAddTask }: TaskFormProps) {
+    const [newTask, setNewTask] = useState<string>("")
+
+    function onAddTask() {
+        handleAddTask(newTask)
+        // sets the newTask into empty strings again
+        setNewTask("")
+    }
+
     return (
         <form className="task-form" onSubmit={(e) => e.preventDefault()}>
             <label htmlFor="add-task">New Task:</label>
@@ -14,7 +22,7 @@ function TaskForm({ newTask, setNewTask, addTask }: TaskFormProps) {
                 value={newTask}
                 onChange={(e) => setNewTask(e.target.value)}
             />
-            <button onClick={addTask}>Add</button>
+            <button onClick={onAddTask}>Add</button>
         </form>
     )
 }
