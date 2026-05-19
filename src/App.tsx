@@ -3,6 +3,7 @@ import type { Filter, Task } from './types/types'
 import TaskList from './components/TaskList'
 import TaskForm from './components/TaskForm'
 import TaskFilter from './components/TaskFilter'
+import Dashboard from './components/Dashboard'
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>([])
@@ -83,7 +84,7 @@ function App() {
   }
 
   // Delete task function
-  function deleteTask(id: number) {
+  function handleDeleteTask(id: number) {
     setTasks(prevTasks =>
       prevTasks.filter(task => task.id !== id)
     )
@@ -99,13 +100,14 @@ function App() {
     content = <p>No tasks available</p>
   } else {
     content = (
-      <TaskList tasks={filteredTasks} toggleTask={toggleTask} deleteTask={deleteTask} />
+      <TaskList tasks={filteredTasks} toggleTask={toggleTask} deleteTask={handleDeleteTask} />
     )
   }
 
   return (
     <>
       <h3>Task Manager</h3>
+      <Dashboard tasks={tasks} />
       <TaskForm handleAddTask={handleAddTask} />
       <TaskFilter filter={filter} setFilter={setFilter} />
       <div>

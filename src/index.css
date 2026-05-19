@@ -171,6 +171,12 @@ li.completed span {
     text-decoration: line-through;
 }
 
+/* DASHBOARD */
+.dashboard-container {
+    display: flex;
+    justify-content: space-around;
+}
+
 /* ------------- ANIMATIONS ------------- */
 @keyframes taskIn {
     from {
@@ -182,7 +188,6 @@ li.completed span {
         transform: translateY(0);
     }
 }
-
 
 /* ------------- QUERIES ------------- */
 
